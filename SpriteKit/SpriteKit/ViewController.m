@@ -26,6 +26,33 @@
     self.view = view;
 }
 
+
+- (void)aadShapeNode{
+    SKShapeNode *shapeNode = [[SKShapeNode alloc] init];
+       shapeNode.position = CGPointMake(100,100);
+
+       UIBezierPath *path = [[UIBezierPath alloc] init];
+       CGPoint point_1 = CGPointMake(CGRectGetMinX(self.view.frame)- 5, 0);
+       CGPoint point_2 = CGPointMake( point_1.x + 5, point_1.y + 59);
+       CGPoint point_3 = CGPointMake(point_1.x + 10, point_1.y );
+       CGPoint point_4 = CGPointMake(point_1.x + 5,  point_1.y - 5);
+                                      CGPoint point_5 = point_1;
+       [path moveToPoint:point_1];
+       [path addLineToPoint:point_2];
+       [path addLineToPoint:point_3];
+       [path addLineToPoint:point_4];
+       [path addLineToPoint:point_5];
+       shapeNode.path = path.CGPath;
+       shapeNode.strokeColor = [UIColor whiteColor];       //填充颜色
+       shapeNode.fillColor = [UIColor redColor];           //线颜色
+       shapeNode.lineWidth = 1 ;                    //线宽
+       shapeNode.glowWidth = 4;                     //光晕
+       shapeNode.lineJoin = kCGLineJoinRound;                 //线连接方式
+       shapeNode.physicsBody =   [SKPhysicsBody bodyWithPolygonFromPath:path.CGPath] ;//设置物理引擎
+       shapeNode.physicsBody.dynamic = NO;  //设置为静态物体
+       [sc addChild:shapeNode];
+    
+}
 - (void)addStaticShapeNode {
     SKShapeNode *shapeNode = [[SKShapeNode alloc] init];
     shapeNode.position = CGPointMake(100,100);
@@ -38,9 +65,9 @@
                                    CGPoint point_5 = point_1;
     [path moveToPoint:point_1];
     [path addLineToPoint:point_2];
-       [path addLineToPoint:point_3];
-       [path addLineToPoint:point_4];
-       [path addLineToPoint:point_5];
+    [path addLineToPoint:point_3];
+    [path addLineToPoint:point_4];
+    [path addLineToPoint:point_5];
     shapeNode.path = path.CGPath;
     shapeNode.strokeColor = [UIColor whiteColor];       //填充颜色
     shapeNode.fillColor = [UIColor redColor];           //线颜色
@@ -53,14 +80,36 @@
    }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    SKSpriteNode *node=[[SKSpriteNode alloc] initWithImageNamed:@"1"];
-    node.position = [touches.anyObject locationInView:self.view];
-    node.size = CGSizeMake(40,40);
-    node.color = [UIColor redColor];
-    node.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:node.frame.size];
-    
-    [sc addChild:node];
+    SKShapeNode *shapeNode = [[SKShapeNode alloc] init];
+          shapeNode.position = [touches.anyObject locationInView:self.view];
+
+          UIBezierPath *path = [[UIBezierPath alloc] init];
+          CGPoint point_1 = CGPointMake(CGRectGetMinX(self.view.frame)- 5, 0);
+          CGPoint point_2 = CGPointMake( point_1.x -10, point_1.y -10);
+          CGPoint point_3 = CGPointMake(point_1.x + 10, point_1.y-10 );
+//          CGPoint point_4 = CGPointMake(point_1.x + 5,  point_1.y - 5);
+            CGPoint point_5 = point_1;
+          [path moveToPoint:point_1];
+          [path addLineToPoint:point_2];
+          [path addLineToPoint:point_3];
+//          [path addLineToPoint:point_4];
+          [path addLineToPoint:point_5];
+          shapeNode.path = path.CGPath;
+          shapeNode.strokeColor = [UIColor whiteColor];       //填充颜色
+          shapeNode.fillColor = [UIColor redColor];           //线颜色
+//          shapeNode.lineWidth = 1 ;                    //线宽
+//          shapeNode.glowWidth = 4;                     //光晕
+          shapeNode.lineJoin = kCGLineJoinRound;                 //线连接方式
+          shapeNode.physicsBody =   [SKPhysicsBody bodyWithPolygonFromPath:path.CGPath] ;//设置物理引擎
+//          shapeNode.physicsBody.dynamic = NO;  //设置为静态物体
+          [sc addChild:shapeNode];
+//    SKSpriteNode *node=[[SKSpriteNode alloc] initWithImageNamed:@"1"];
+//    node.position = [touches.anyObject locationInView:self.view];
+//    node.size = CGSizeMake(40,40);
+//    node.color = [UIColor redColor];
+//    node.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:node.frame.size];
+//
+//    [sc addChild:node];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
